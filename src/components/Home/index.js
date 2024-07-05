@@ -1,7 +1,23 @@
 import Header from "../Header";
 import "./index.css";
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const accessToken = Cookies.get("jwt_token");
+
+  useEffect(() => {
+    if (!accessToken) {
+      navigate("/login");
+    }
+  }, [accessToken, navigate]);
+
+  if (accessToken === undefined) {
+    return null;
+  }
+
   return (
     <>
       <Header />

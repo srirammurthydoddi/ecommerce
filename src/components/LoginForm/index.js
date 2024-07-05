@@ -1,11 +1,14 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./index.css";
+import Cookies from "js-cookie";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showSubmitError, setShowSubmitError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const navigate = useNavigate();
 
   const onChangeUsername = (event) => {
     setUsername(event.target.value);
@@ -15,7 +18,42 @@ const LoginForm = () => {
     setPassword(event.target.value);
   };
 
-  const submitForm = () => {};
+  const onSubmitSuccess = (jwtToken) => {
+    Cookies.set("jwt_token", jwtToken, {
+      expires: 30,
+    });
+    navigate("/");
+  };
+
+  const onSubmitFailure = (errorMsg) => {
+    setShowSubmitError(true);
+    setErrorMsg(errorMsg);
+  };
+
+  const submitForm = async (event) => {
+    event.preventDefault();
+    if (username === "") {
+      onSubmitFailure("Username is required");
+      return;
+    }
+    if (password === "") {
+      onSubmitFailure("Password is required");
+      return;
+    }
+    const userDetails = { username, password };
+    const url = "https://apis.ccbp.in/login";
+    const options = {
+      method: "POST",
+      body: JSON.stringify(userDetails),
+    };
+    const response = await fetch(url, options);
+    const data = await response.json();
+    if (response.ok === true) {
+      onSubmitSuccess();
+    } else {
+      onSubmitFailure(data.error_msg);
+    }
+  };
 
   return (
     <div className="login-form-container">
