@@ -7,6 +7,7 @@ import { useEffect } from "react";
 const Cart = () => {
   const navigate = useNavigate();
   const accessToken = Cookies.get("jwt_token");
+  console.log("JWT Token retrieved:", accessToken);
 
   useEffect(() => {
     if (!accessToken) {

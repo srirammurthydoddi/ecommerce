@@ -3,6 +3,8 @@ import Header from "../Header";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
+import AllProductsSection from "../AllProductsSection";
+import PrimeDealsSection from "../PrimeDealsSection";
 
 const Products = () => {
   const navigate = useNavigate();
@@ -21,12 +23,9 @@ const Products = () => {
   return (
     <>
       <Header />
-      <div className="products-container">
-        <img
-          src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-products-img.png"
-          alt="products"
-          className="products-img"
-        />
+      <div className="product-sections">
+        <PrimeDealsSection />
+        <AllProductsSection />
       </div>
     </>
   );
