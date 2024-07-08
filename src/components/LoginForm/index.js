@@ -22,6 +22,7 @@ const LoginForm = () => {
     Cookies.set("jwt_token", jwtToken, {
       expires: 30,
     });
+    console.log("JWT Token set:", jwtToken);
     navigate("/");
   };
 
@@ -49,7 +50,7 @@ const LoginForm = () => {
     const response = await fetch(url, options);
     const data = await response.json();
     if (response.ok === true) {
-      onSubmitSuccess();
+      onSubmitSuccess(data.jwt_token);
     } else {
       onSubmitFailure(data.error_msg);
     }
