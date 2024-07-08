@@ -64,7 +64,7 @@ const AllProductsSection = () => {
   const getProducts = useCallback(async () => {
     setApiStatus(apiStatusConstants.inProgress);
     const jwtToken = Cookies.get("jwt_token");
-    console.log("JWT Token retrieved:", jwtToken);
+    // console.log("JWT Token retrieved:", jwtToken);
     const apiUrl = `https://apis.ccbp.in/products?sort_by=${activeOptionId}&category=${activeCategoryId}&title_search=${searchInput}&rating=${activeRatingId}`;
     const options = {
       headers: {

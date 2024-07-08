@@ -24,7 +24,7 @@ const PrimeDealsSection = () => {
   const getPrimeDeals = async () => {
     setApiStatus(apiStatusConstants.inProgress);
     const jwtToken = Cookies.get("jwt_token");
-    console.log("JWT Token retrieved:", jwtToken);
+    // console.log("JWT Token retrieved:", jwtToken);
     if (!jwtToken) {
       navigate("/login");
       return;

@@ -20,6 +20,12 @@
   border-radius: 6px;
 }
 
+.link-item {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
 .title {
   color: #171f46;
   font-family: "Roboto";
